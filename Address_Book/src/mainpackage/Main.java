@@ -52,5 +52,6 @@ public class Main {
 			
 		}while(answer != exit);
 		System.out.println("Application terminating...");
+		input.close();
 	}
 }
