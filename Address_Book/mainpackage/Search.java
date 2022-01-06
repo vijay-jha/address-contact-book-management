@@ -1,4 +1,4 @@
-package mainpackage;
+package Address_Book.mainpackage;
 
 import java.util.*;
 import java.util.Arrays;
@@ -48,7 +48,7 @@ public class Search {
 		name = input.nextLine();
 		System.out.println("Give Surname: ");
 		surname = input.nextLine();
-		File file = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/mainpackage/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
 		boolean first = false;
@@ -129,7 +129,7 @@ public class Search {
 		// 		valid = false;
 		// 	}
 		// } while (valid == false);
-		File file = new File(System.getProperty("user.dir") + "/src/contacts.txt");
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/mainpackage/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
 		boolean first = false;

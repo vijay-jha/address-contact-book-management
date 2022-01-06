@@ -1,13 +1,13 @@
-package mainpackage;
+package Address_Book.mainpackage;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-import mainpackage.Print;
-import mainpackage.Add;
-import mainpackage.Search;
-import mainpackage.Change;
-import mainpackage.Delete;
+import Address_Book.mainpackage.Add;
+import Address_Book.mainpackage.Change;
+import Address_Book.mainpackage.Delete;
+import Address_Book.mainpackage.Print;
+import Address_Book.mainpackage.Search;
 
 import java.io.*;
 import java.net.*;

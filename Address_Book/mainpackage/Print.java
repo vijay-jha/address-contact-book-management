@@ -1,4 +1,4 @@
-package mainpackage;
+package Address_Book.mainpackage;
 
 import java.util.*;
 import java.util.Arrays;
@@ -17,8 +17,7 @@ import java.util.Scanner;
 public class Print extends Main {
 	public static void show_contacts() throws IOException, FileNotFoundException, InterruptedException {
 		// Thread thread = new Thread();
-		File file = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");// we get the contact
-																								// file
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/mainpackage/contacts.txt");
 
 		file.createNewFile();
 		BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -26,7 +25,7 @@ public class Print extends Main {
 		boolean first = false;
 		String[] fields = new String[0];
 		while ((currentLine = reader.readLine()) != null) {// for each line in txt file
-			if (!first) {// if it is the first line the line is the fields and we save them into an array
+			if (!first) {
 				fields = currentLine.split(",");
 				first = true;
 			} else {// for the rest lines we print the information

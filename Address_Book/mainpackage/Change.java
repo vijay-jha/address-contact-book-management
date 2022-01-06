@@ -1,4 +1,4 @@
-package mainpackage;
+package Address_Book.mainpackage;
 
 import java.io.*;
 import java.nio.file.DirectoryNotEmptyException;
@@ -7,18 +7,18 @@ import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.*; 
+import java.util.regex.*;
 
 public class Change {
 	public static void choose_field() throws FileNotFoundException, IOException {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
-		
+
 		Scanner input = new Scanner(System.in);
 		int exit = 0;
 		int answer;
 		// we will loop until user wants to exit the application
-		do {// according to user's input i go to the correct method
+		do { // according to user's input i go to the correct method
 			System.out.println("Do you want to edit a contact based on the name or Phone number?");
 			System.out.println("Give '1', '2' or '0' to return to main menu.");
 			try {
@@ -43,7 +43,7 @@ public class Change {
 		System.out.println("Give Surname: ");
 		surname = input.nextLine();
 
-		File file = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/mainpackage/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
 		boolean first = false;
@@ -55,7 +55,7 @@ public class Change {
 				fields = currentLine.split(",");
 				first = true;
 			} else {
-				// only if both of the user's inputs (name and surname) match a contact then 
+				// only if both of the user's inputs (name and surname) match a contact then
 				// add this contact's info to an array
 				String[] info = currentLine.split(",");
 
@@ -112,32 +112,16 @@ public class Change {
 		do {
 			mobilePhone = input.nextLine();
 			valid = isValidMobileNo(mobilePhone);
-			// try {
-			// 	f1 = Integer.parseInt(input.nextLine());
-			// } catch (NumberFormatException e) {
-			// 	// e.printStackTrace();
-			// 	valid = false;
-			// }
 
 		} while (valid == false);
-		// System.out.println("Give Mobile number: ");
-		// do {
-		// 	valid = true;
-		// 	try {
-		// 		f2 = Integer.parseInt(input.nextLine());
-		// 	} catch (NumberFormatException e) {
-		// 		// e.printStackTrace();
-		// 		valid = false;
-		// 	}
-		// } while (valid == false);
-		File file = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");
+
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/mainpackage/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
 		boolean first = false;
 		String[] fields = new String[0];
-		// if (f1 == -1 && f2 == -1) 
-		if (mobilePhone.isEmpty())
-		{
+
+		if (mobilePhone.isEmpty()) {
 			System.out.println("-------------------");
 			System.out.println("You gave wrong information.");
 		} else {
@@ -154,44 +138,6 @@ public class Change {
 						}
 						lines.add(currentLine);
 					}
-
-				// 	if (f1 == -1 && f2 != -1) {
-				// 		if (info[3].equals(String.valueOf(f2))) {
-				// 			System.out.println("----There is a contact for the Mobile number you gave----");
-				// 			for (int i = 0; i < fields.length; i++) {
-				// 				System.out.println(fields[i] + ": " + info[i]);
-				// 			}
-				// 			System.out.println("----Phone and Mobile numbers must be valid----");
-				// 		}
-				// 	} else if (f1 != -1 && f2 == -1) {
-				// 		if (info[2].equals(String.valueOf(f1))) {
-				// 			System.out.println("----There is a contact for the Phone number you gave----");
-				// 			for (int i = 0; i < fields.length; i++) {
-				// 				System.out.println(fields[i] + ": " + info[i]);
-				// 			}
-				// 			System.out.println("----Phone and Mobile numbers must be valid----");
-				// 		}
-				// 	} else if (f1 != -1 && f2 != -1) {
-				// 		if (info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
-				// 			System.out.println("----There is a contact for the information you gave----");
-				// 			for (int i = 0; i < fields.length; i++) {
-				// 				System.out.println(fields[i] + ": " + info[i]);
-				// 			}
-				// 			lines.add(currentLine);
-				// 		} else if (info[2].equals(String.valueOf(f1)) && !info[3].equals(String.valueOf(f2))) {
-				// 			System.out.println("----There is a contact for the Phone number you gave----");
-				// 			for (int i = 0; i < fields.length; i++) {
-				// 				System.out.println(fields[i] + ": " + info[i]);
-				// 			}
-				// 			System.out.println("----Phone and Mobile numbers must be valid----");
-				// 		} else if (!info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
-				// 			System.out.println("----There is a contact for the Mobile number you gave----");
-				// 			for (int i = 0; i < fields.length; i++) {
-				// 				System.out.println(fields[i] + ": " + info[i]);
-				// 			}
-				// 			System.out.println("----Phone and Mobile numbers must be valid----");
-				// 		}
-				// 	}
 				}
 			}
 		}
@@ -204,19 +150,14 @@ public class Change {
 	}
 
 	public static void info_check(String line, String[] fields) throws IOException, FileNotFoundException {
-		// in this method user gives the contact's new info
 		Scanner input = new Scanner(System.in);
-		// File file1 = new File(System.getProperty("user.dir")+"/src/contacts.txt");
 		String currentLine;
-
 		String name = "";
 		String surname = "";
 		String mobilePhone;
 		String emailId = "";
 		String street = "";
 		String town = "";
-		int f3 = -1;
-		int f4 = -1;
 		int streetNo = -1;
 		int zipCode = -1;
 		String str = "";
@@ -231,27 +172,11 @@ public class Change {
 			duplicate = false;
 			valid = true;
 			System.out.println("Change the information " + fields[2] + ": " + info[2] + ", to:");
-			// try {
-			// 	f3 = Integer.parseInt(input.nextLine());
-			// } catch (NumberFormatException e) {
-			// 	// e.printStackTrace();
-			// 	valid = false;
-			// }
 			mobilePhone = input.nextLine();
 			valid = isValidMobileNo(mobilePhone);
 
 		} while (duplicate == true || valid == false);
-		// do {
-		// 	duplicate = false;
-		// 	valid = true;
-		// 	System.out.println("Change the information " + fields[3] + ": " + info[3] + ", to:");
-		// 	try {
-		// 		f4 = Integer.parseInt(input.nextLine());
-		// 	} catch (NumberFormatException e) {
-		// 		// e.printStackTrace();
-		// 		valid = false;
-		// 	}
-		// } while (duplicate == true || valid == false);
+
 		do {
 			duplicate = false;
 			System.out.println("Change the information " + fields[3] + ": " + info[3] + ", to:");
@@ -263,7 +188,6 @@ public class Change {
 		try {
 			streetNo = Integer.parseInt(input.nextLine());
 		} catch (NumberFormatException e) {
-			// e.printStackTrace();
 		}
 		System.out.println("Change the information " + fields[6] + ": " + info[6] + ", to:");
 		town = input.nextLine();
@@ -271,32 +195,28 @@ public class Change {
 		try {
 			zipCode = Integer.parseInt(input.nextLine());
 		} catch (NumberFormatException e) {
-			// e.printStackTrace();
 		}
-		str = name + "," + surname + "," + mobilePhone  + "," + emailId + "," + street + ","
+		str = name + "," + surname + "," + mobilePhone + "," + emailId + "," + street + ","
 				+ String.valueOf(streetNo) + "," + town + "," + String.valueOf(zipCode);
-		if (name == "" || surname == "" || emailId == "" || street == "" || town == "" || mobilePhone.isEmpty() || streetNo == -1 || zipCode == -1) {
+		if (name == "" || surname == "" || emailId == "" || street == "" || town == "" || mobilePhone.isEmpty()
+				|| streetNo == -1 || zipCode == -1) {
 			// if any of the variables is not valid or has a value assigned to it
 			System.out.println("You gave wrong information, information change wasn't successful.");
-		} else {// else i call this method and pass the string of the new info i built
+		} else { // else i call this method and pass the string of the new info i built
 			contact_change(line, str);
 		}
 	}
 
 	public static void contact_change(String line, String str) throws IOException, FileNotFoundException {
-		File file1 = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");
-		BufferedReader reader = new BufferedReader(new FileReader(file1));
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/mainpackage/contacts.txt");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
 		boolean first = false;
-		boolean duplicate = false;
 		String[] fields = new String[0];
 		String[] info1 = new String[0];
 		String[] info2 = new String[0];
 		info1 = str.split(",");
-		File file2 = new File(System.getProperty("user.dir") + "/Address_Book/contactstemp.txt");// i create a
-																										// temporary
-																										// file to save
-																										// the changes
+		File file2 = new File(System.getProperty("user.dir") + "/Address_Book/mainpackage/contactstemp.txt");
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file2));
 		while ((currentLine = reader.readLine()) != null) {
 			if (!first) {
@@ -304,33 +224,17 @@ public class Change {
 				writer.write(currentLine + "\n");
 				first = true;
 			} else if (currentLine.equals(line)) {// if the current line in the reader is the one we want to change
-				writer.write(str + "\n");// i write the new info instead of the old
-			} else {// for the rest of the lines nothing changes
+				writer.write(str + "\n"); // i write the new info instead of the old
+			} else { // for the rest of the lines nothing changes
 				info2 = currentLine.split(",");
-				// if (info2[2].equals(info1[2])) {
-				// 	System.out.println("Mobile number must be unique among the contacts.");
-				// 	duplicate = true;
-				// } else if (info2[3].equals(info1[3])) {
-				// 	System.out.println("Phone number must be unique among the contacts.");
-				// 	duplicate = true;
-				// } else if (info2[4].equals(info1[4])) {
-				// 	System.out.println("E-mail must be unique among the contacts.");
-				// 	duplicate = true;
-				// }
 				writer.write(currentLine + "\n");
 			}
 		}
 		reader.close();
 		writer.close();
 
-		// if (duplicate) {// if we found that the new info are not unique the changed wont be saved
-		// 	System.out.println("Contact change did not complete.");
-		// 	file2.delete();// we delete the temporary file
-		// } else {// if everything is ok
-		// 	System.out.println("Contact change is completed.");
-			file1.delete();// we delete the original file
-			file2.renameTo(file1);// we rename the temporary file to the original file's name
-		// }
+		file.delete();	// we delete the original file
+		file2.renameTo(file);	// we rename the temporary file to the original file's name
 	}
 
 }

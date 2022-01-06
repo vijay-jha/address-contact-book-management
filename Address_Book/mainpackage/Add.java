@@ -1,4 +1,4 @@
-package mainpackage;
+package Address_Book.mainpackage;
 
 import java.util.*;
 import java.util.Arrays;
@@ -20,10 +20,10 @@ public class Add extends Main {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 
-		File file = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");// we get the file
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/mainpackage/contacts.txt");// we get the file
 		BufferedReader reader = new BufferedReader(new FileReader(file)); // we get reader for the file
 		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
-				new FileOutputStream(System.getProperty("user.dir") + "/Address_Book/contacts.txt", true), "UTF-8");
+				new FileOutputStream(System.getProperty("user.dir") + "/Address_Book/mainpackage/contacts.txt", true), "UTF-8");
 		BufferedWriter writer = new BufferedWriter(outputStreamWriter);
 		// this is a way to get a writer for th specific file
 
@@ -39,7 +39,6 @@ public class Add extends Main {
 		String string;
 		String mobilePhoneString = "";
 
-		int f3 = -1;
 		int mobilePhone = -1;
 		int streetNo = -1;
 		int zipCode = -1;
@@ -54,12 +53,7 @@ public class Add extends Main {
 			duplicate = false;
 			valid = true;
 			System.out.println("Give Mobile phone: ");
-			// try {
-			// 	mobilePhone = Integer.parseInt(input.nextLine());
-			// } catch (NumberFormatException e) {
-			// 	System.out.println("Mobile phone must be number.");
-			// 	valid = false;
-			// }
+		
 			mobilePhoneString = input.nextLine();
 			valid = isValidMobileNo(mobilePhoneString);
 
