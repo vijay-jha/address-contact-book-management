@@ -82,6 +82,7 @@ public class Change {
 			}
 		}
 		System.out.println("-------------------");
+
 		reader.close();
 		for (Object str : lines) {
 			// for every contatc that i found that is a match
@@ -162,8 +163,10 @@ public class Change {
 		int zipCode = -1;
 		String str = "";
 		boolean duplicate, valid;
+
 		System.out.println("----Edit Information----");
 		String[] info = line.split(",");
+
 		System.out.println("Change the information " + fields[0] + ": " + info[0] + ", to:");
 		name = input.nextLine();
 		System.out.println("Change the information " + fields[1] + ": " + info[1] + ", to:");

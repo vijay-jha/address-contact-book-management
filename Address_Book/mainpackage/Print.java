@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class Print extends Main {
 	public static void show_contacts() throws IOException, FileNotFoundException, InterruptedException {
-		// Thread thread = new Thread();
+		Scanner input = new Scanner(System.in);
 		File file = new File(System.getProperty("user.dir") + "/Address_Book/mainpackage/contacts.txt");
 
 		file.createNewFile();
@@ -38,7 +38,14 @@ public class Print extends Main {
 		}
 		System.out.println("-------------------");
 		reader.close();
-		Thread.sleep(1000);
-		
+		System.out.println("Enter 0 to go back to the main Menu");
+		int ans = input.nextInt();
+		if (ans == 0) {
+			return;
+		} else {
+			show_contacts();
+		}
+		;
+
 	}
 }

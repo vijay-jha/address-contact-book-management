@@ -1,1 +1,3 @@
 Name,Surname,Phone,E-mail,Street,Number,Town,Zip
+Vinay,Bhujbal,9766453012,gBaraBhujbal@gmail.com,Kothrud,420,Pune,411012
+Akshay,Gade,8114155111,akshu@gmail.com,Bhosari,16,Pune,411025
