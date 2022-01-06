@@ -38,11 +38,10 @@ public class Main {
 			try {// we handle the input of the user
 				answer = input.nextInt();
 			} catch (NumberFormatException e) {
-				// e.printStackTrace();
 				answer = -1;
 			}
+			
 			if (answer == 1)// according to user's input we go to each class
-
 				Add.add_contact();
 			else if (answer == 2)
 				Search.choose_field();

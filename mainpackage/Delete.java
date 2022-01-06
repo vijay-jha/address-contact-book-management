@@ -1,44 +1,37 @@
 package mainpackage;
 
-import java.util.*;
-import java.util.Arrays;
 import java.io.*;
-import java.net.*;
-import java.nio.charset.Charset;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.*;
 
-public class Search {
+public class Delete {
 	public static void choose_field() throws FileNotFoundException, IOException {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
+		
 		Scanner input = new Scanner(System.in);
 		int exit = 0;
-		int answer = -1;
+		int answer;
 		// we will loop until user wants to exit the application
-		while (answer != exit) {
-
-			System.out.println("Do you want to search beased on name or based on phone?");
-			System.out.println("Give '1' or '2' or anser '0' to return to main menu.");
+		do {// according to user's input i go to the correct method
+			System.out.println("Do you want to delete a contact based on the name or the phone number?");
+			System.out.println("Give '1', '2' or '0' to go back to main menu.");
 			try {
 				answer = input.nextInt();
 			} catch (Exception e) {
 				answer = 0;
 			}
-
-			if (answer == 1)// according to user's input i go to the correct method
+			if (answer == 1)
 				name_search();
 			else if (answer == 2)
 				number_search();
 
-		}
+		} while (answer != exit);
 	}
 
 	public static void name_search() throws IOException, FileNotFoundException {
@@ -48,42 +41,47 @@ public class Search {
 		name = input.nextLine();
 		System.out.println("Give Surname: ");
 		surname = input.nextLine();
-		File file = new File(System.getProperty("user.dir") + "/Address_Book/src/contacts.txt");
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
 		boolean first = false;
 		String[] fields = new String[0];
-
+		List<String> lines = new ArrayList<String>();
 		while ((currentLine = reader.readLine()) != null) {
 			if (!first) {
 				fields = currentLine.split(",");
 				first = true;
-			} else {// if both fields that the user gave match a contact i show contact's info
+			} else {// only if both of the user's inputs (name and surname) match a contact then i
+					// add this contact's info to an array
 				String[] info = currentLine.split(",");
 				if (info[0].equals(name) && info[1].equals(surname)) {
 					System.out.println("----There is a contact for the information you gave----");
 					for (int i = 0; i < fields.length; i++) {
 						System.out.println(fields[i] + ": " + info[i]);
 					}
-				} else if (info[0].equals(name) && !info[1].equals(surname)) {// if one of the fields that the user gave match
-																		// a contact i show contact's info
+					// contact_change(currentLine);
+					lines.add(currentLine);
+				} else if (info[0].equals(name) && !info[1].equals(surname)) {
 					System.out.println("----There is a contact for the Name you gave----");
 					for (int i = 0; i < fields.length; i++) {
 						System.out.println(fields[i] + ": " + info[i]);
 					}
-				} else if (!info[0].equals(name) && info[1].equals(surname)) {// if one of the fields that the user gave match
-																		// a contact i show contact's info
+					System.out.println("----Name ans Surname must be valid----");
+				} else if (!info[0].equals(name) && info[1].equals(surname)) {
 					System.out.println("----There is a contact for the Surname you gave----");
 					for (int i = 0; i < fields.length; i++) {
 						System.out.println(fields[i] + ": " + info[i]);
 					}
+					System.out.println("----Name and Surname must be valid----");
 				}
 
 			}
 		}
 		System.out.println("-------------------");
 		reader.close();
-		// choose_field(0);
+		for (Object str : lines) {// for every contatc that i found that is a match
+			contact_delete(str.toString());
+		}
 	}
 
 	public static boolean isValidMobileNo(String str) {
@@ -98,7 +96,6 @@ public class Search {
 		return (match.find() && match.group().equals(str));
 	}
 
-
 	public static void number_search() throws IOException, FileNotFoundException {
 		Scanner input = new Scanner(System.in);
 		int f1 = -1;
@@ -106,35 +103,35 @@ public class Search {
 		String mobilePhone = "";
 		boolean valid;
 		System.out.println("Give Phone number: ");
-		do {// this is a do-while loop in which I check for valid input (must me integer)
+		do {
 			// valid = true;
 			// try {
 			// 	f1 = Integer.parseInt(input.nextLine());
 			// } catch (NumberFormatException e) {
 			// 	// e.printStackTrace();
-			// 	System.out.println("Phone number must be number.");
 			// 	valid = false;
 			// }
 			mobilePhone = input.nextLine();
 			valid = isValidMobileNo(mobilePhone);
 		} while (valid == false);
-		// System.out.println("Give mobile number: ");
+		// System.out.println("Give Mobile number: ");
 		// do {
 		// 	valid = true;
 		// 	try {
 		// 		f2 = Integer.parseInt(input.nextLine());
 		// 	} catch (NumberFormatException e) {
 		// 		// e.printStackTrace();
-		// 		System.out.println("Mobile number must be number.");
 		// 		valid = false;
 		// 	}
 		// } while (valid == false);
-		File file = new File(System.getProperty("user.dir") + "/src/contacts.txt");
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
 		boolean first = false;
 		String[] fields = new String[0];
-		if (mobilePhone.isEmpty()) {
+		// if (f1 == -1 && f2 == -1)
+		if (mobilePhone.isEmpty())
+		 {
 			System.out.println("-------------------");
 			System.out.println("You gave wrong information.");
 		} else {
@@ -142,20 +139,23 @@ public class Search {
 				if (!first) {
 					fields = currentLine.split(",");
 					first = true;
-				} else {// if any of the user's inputs match a contact i show the contact's info
+				} else {
 					String[] info = currentLine.split(",");
 					if (info[2].equals(mobilePhone)) {
-						System.out.println("----There is a contact for the Phone you gave----");
+						System.out.println("----There is a contact for the information you gave----");
 						for (int i = 0; i < fields.length; i++) {
 							System.out.println(fields[i] + ": " + info[i]);
 						}
+						contact_delete(currentLine);
 					}
+
 					// if (f1 == -1 && f2 != -1) {
 					// 	if (info[3].equals(String.valueOf(f2))) {
 					// 		System.out.println("----There is a contact for the Mobile number you gave----");
 					// 		for (int i = 0; i < fields.length; i++) {
 					// 			System.out.println(fields[i] + ": " + info[i]);
 					// 		}
+					// 		System.out.println("----Phone and Mobile numbers must be valid----");
 					// 	}
 					// } else if (f1 != -1 && f2 == -1) {
 					// 	if (info[2].equals(String.valueOf(f1))) {
@@ -163,23 +163,27 @@ public class Search {
 					// 		for (int i = 0; i < fields.length; i++) {
 					// 			System.out.println(fields[i] + ": " + info[i]);
 					// 		}
+					// 		System.out.println("----Phone and Mobile numbers must be valid----");
 					// 	}
 					// } else if (f1 != -1 && f2 != -1) {
 					// 	if (info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
-					// 		System.out.println("----There is a contact for the Phone and Mobile number you gave----");
+					// 		System.out.println("----There is a contact for the information you gave----");
 					// 		for (int i = 0; i < fields.length; i++) {
 					// 			System.out.println(fields[i] + ": " + info[i]);
 					// 		}
+					// 		contact_delete(currentLine);
 					// 	} else if (info[2].equals(String.valueOf(f1)) && !info[3].equals(String.valueOf(f2))) {
 					// 		System.out.println("----There is a contact for the Phone number you gave----");
 					// 		for (int i = 0; i < fields.length; i++) {
 					// 			System.out.println(fields[i] + ": " + info[i]);
 					// 		}
+					// 		System.out.println("----Phone and Mobile numbers must be valid----");
 					// 	} else if (!info[2].equals(String.valueOf(f1)) && info[3].equals(String.valueOf(f2))) {
-					// 		System.out.println("----There is a contact for the Phone number you gave----");
+					// 		System.out.println("----There is a contact for the Mobile number you gave----");
 					// 		for (int i = 0; i < fields.length; i++) {
 					// 			System.out.println(fields[i] + ": " + info[i]);
 					// 		}
+					// 		System.out.println("----Phone and Mobile numbers must be valid----");
 					// 	}
 					// }
 				}
@@ -188,6 +192,34 @@ public class Search {
 
 		System.out.println("-------------------");
 		reader.close();
+	}
+
+	public static void contact_delete(String line) throws IOException, FileNotFoundException {
+		File file1 = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");
+		BufferedReader reader1 = new BufferedReader(new FileReader(file1));
+		String currentLine1;
+		boolean first = false;
+		String[] fields = new String[0];
+		File file2 = new File(System.getProperty("user.dir") + "/Address_Book/contactstemp.txt");// i create a
+																										// temporary
+																										// file to save
+																										// the changes
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file2));
+		while ((currentLine1 = reader1.readLine()) != null) {
+			if (!first) {
+				fields = currentLine1.split(",");
+				writer.write(currentLine1 + "\n");
+				first = true;
+			} else if (!currentLine1.equals(line)) {// if the current line in the reader is not the one we want to
+													// delete we write it to the temp file
+				writer.write(currentLine1 + "\n");
+			}
+		}
+		reader1.close();
+		writer.close();
+		file1.delete();// we delete the original file
+		file2.renameTo(file1);// we rename the temporary file to the original file's name
+		System.out.println("Information was valid, deletion completed successfully");
 	}
 
 }

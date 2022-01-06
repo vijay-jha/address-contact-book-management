@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class Print extends Main {
 	public static void show_contacts() throws IOException, FileNotFoundException, InterruptedException {
 		// Thread thread = new Thread();
-		File file = new File(System.getProperty("user.dir") + "/Address_Book/src/contacts.txt");// we get the contact
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");// we get the contact
 																								// file
 
 		file.createNewFile();

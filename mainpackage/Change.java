@@ -43,7 +43,7 @@ public class Change {
 		System.out.println("Give Surname: ");
 		surname = input.nextLine();
 
-		File file = new File(System.getProperty("user.dir") + "/Address_Book/src/contacts.txt");
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
 		boolean first = false;
@@ -130,7 +130,7 @@ public class Change {
 		// 		valid = false;
 		// 	}
 		// } while (valid == false);
-		File file = new File(System.getProperty("user.dir") + "/Address_Book/src/contacts.txt");
+		File file = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String currentLine;
 		boolean first = false;
@@ -284,7 +284,7 @@ public class Change {
 	}
 
 	public static void contact_change(String line, String str) throws IOException, FileNotFoundException {
-		File file1 = new File(System.getProperty("user.dir") + "/Address_Book/src/contacts.txt");
+		File file1 = new File(System.getProperty("user.dir") + "/Address_Book/contacts.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file1));
 		String currentLine;
 		boolean first = false;
@@ -293,7 +293,7 @@ public class Change {
 		String[] info1 = new String[0];
 		String[] info2 = new String[0];
 		info1 = str.split(",");
-		File file2 = new File(System.getProperty("user.dir") + "/Address_Book/src/contactstemp.txt");// i create a
+		File file2 = new File(System.getProperty("user.dir") + "/Address_Book/contactstemp.txt");// i create a
 																										// temporary
 																										// file to save
 																										// the changes
